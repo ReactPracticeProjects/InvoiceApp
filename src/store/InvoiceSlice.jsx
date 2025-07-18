@@ -1,33 +1,38 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    invoice: [{
-    invoiceNumber: "INV5019",
-    dueDate: "03 April 2025",
-    customerName: "Aarav Sharma",
-    amount: 750,
+    invoice: [  {
+    biller: {
+      streetAdd: "Kulswaminin nagar, barshi road, latur",
+      city: "Latur",
+      pincode: "413512",
+      country: "India"
+    },
+    client: {
+      name: "Sainath Mhetre",
+      email: "lordasainath1@gmail.com",
+      streetAdd: "KULSWAMININ NAGAR, BARSHI ROAD, LATUR",
+      city: "Latur",
+      pincode: "413512",
+      country: "India"
+    },
+    date: "2025-07-31",
+    dueDate: "10",
+    projectdesc: "Something Intresting",
+    items: {
+      "item-1": {
+        name: "Laptop",
+        quantity: "1",
+        price: "80000"
+      },
+      "item-2": {
+        name: "Charger",
+        quantity: "22",
+        price: "200000"
+      }
+    },
+    invoiceNumber: "INV9840",
     status: "Pending"
-  },
-  {
-    invoiceNumber: "INV5020",
-    dueDate: "06 April 2025",
-    customerName: "Meera Iyer",
-    amount: 1200,
-    status: "Paid"
-  },
-  {
-    invoiceNumber: "INV5021",
-    dueDate: "09 April 2025",
-    customerName: "Rohan Deshmukh",
-    amount: 980,
-    status: "Pending"
-  },
-  {
-    invoiceNumber: "INV5022",
-    dueDate: "12 April 2025",
-    customerName: "Ananya Patel",
-    amount: 1100,
-    status: "Paid"
   }],
     filter: "All",
     isFormOpen : false,
@@ -38,6 +43,16 @@ export const invoiceSlice = createSlice({
     name:"invoice",
     initialState,
     reducers :{
+          
+       FetchInvoiceItem:(state,actions)=>{
+        state.invoice = [...state.invoice]
+        
+         console.log(actions.payload)
+       },
+
+        AddInvoiceItem: (state,actions)=>{
+            state.invoice.push(actions.payload)
+        },
         FormOpenStatus: (state)=>{
             state.isFormOpen = !state.isFormOpen
             if(!state.isFormOpen){
@@ -53,5 +68,5 @@ export const invoiceSlice = createSlice({
 
 
 
-export const {FormOpenStatus,DeleteInvoiceItem} = invoiceSlice.actions
+export const {AddInvoiceItem,FormOpenStatus,DeleteInvoiceItem,FetchInvoiceItem} = invoiceSlice.actions
 export default invoiceSlice.reducer
